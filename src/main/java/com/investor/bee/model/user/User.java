@@ -1,4 +1,4 @@
-package com.investor.bee.model;
+package com.investor.bee.model.user;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -45,12 +45,37 @@ public class User {
     @UpdateTimestamp
     private Instant updateTimestamp;
 
-    public User(Long id, String name, LocalDate birthday, String cpf, String email, String password) {
-        this.id = id;
+    public User(CreateUserDto user) {
+        this.name = user.name();
+        this.birthday = user.birthday();
+        this.cpf = user.cpf();
+        this.email = user.email();
+        this.password = user.password();
+    }
+
+    public User(String name, LocalDate birthday, String cpf, String email, String password) {
         this.name = name;
         this.birthday = birthday;
         this.cpf = cpf;
         this.email = email;
         this.password = password;
+    }
+
+    public void updateData(UpdateUserDto newData) {
+        if(!this.name.equals(newData.name())) {
+            this.name = newData.name();
+        }
+        if(!this.cpf.equals(newData.cpf())) {
+            this.cpf = newData.cpf();
+        }
+        if(!this.birthday.equals(newData.birthday())) {
+            this.birthday = newData.birthday();
+        }
+        if(!this.email.equals(newData.email())) {
+            this.email = newData.email();
+        }
+        if (!this.password.equals(newData.password())) {
+            this.password = newData.password();
+        }
     }
 }
