@@ -1,14 +1,17 @@
 package com.investor.bee.model.user;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.*;
 import java.time.Instant;
 import java.time.LocalDate;
 
+@SQLDelete(sql = "UPDATE tb_user SET active = false WHERE id=?")
+@FilterDef(name = "deletedUserFilter", parameters = @ParamDef(name = "isDeleted", type = Boolean.class))
+@Filter(name = "deletedUserFilter", condition = "active = :isDeleted")
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @Data
@@ -51,14 +54,7 @@ public class User {
         this.cpf = user.cpf();
         this.email = user.email();
         this.password = user.password();
-    }
-
-    public User(String name, LocalDate birthday, String cpf, String email, String password) {
-        this.name = name;
-        this.birthday = birthday;
-        this.cpf = cpf;
-        this.email = email;
-        this.password = password;
+        this.active = true;
     }
 
     public void updateData(UpdateUserDto newData) {
