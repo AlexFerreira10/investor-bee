@@ -57,6 +57,8 @@ public class User {
         this.active = true;
     }
 
+
+
     public void updateData(UpdateUserDto newData) {
         if(!this.name.equals(newData.name())) {
             this.name = newData.name();
