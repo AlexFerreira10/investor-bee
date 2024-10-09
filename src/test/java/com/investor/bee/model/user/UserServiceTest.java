@@ -9,16 +9,12 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.time.LocalDate;
-import java.util.Optional;
-
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
@@ -78,7 +74,6 @@ class UserServiceTest {
 
     @Nested
     class findById {
-        // Problema no Teste
         @Test
         @DisplayName("Should get user by id with success")
         void shouldFindUserByIdWithSuccess() {
@@ -88,15 +83,21 @@ class UserServiceTest {
                     "senha123");
 
             User user = new User(input);
-            doReturn(Optional.of(user)).when(userRepository).findById(idArgumentCaptor.capture());
+            user.setId(1L); // Atribuindo um ID explícito, por exemplo 1L
+
+            // Simula que o usuário existe no repositório
+            doReturn(true).when(userRepository).existsById(1L); // Simula que o ID existe
+            doReturn(user).when(userRepository).getReferenceById(1L); // Simula que o usuário pode ser recuperado
 
             // Action
             var output = userService.findById(user.getId());
 
             // Assert
             assertNotNull(output);
-            assertEquals(user.getId(), idArgumentCaptor.getValue());
 
+            // Captura do ID e verificação
+            verify(userRepository).existsById(idArgumentCaptor.capture()); // Captura o ID aqui
+            assertEquals(user.getId(), idArgumentCaptor.getValue()); // Verifica se o ID capturado é igual ao ID do usuário
         }
     }
 }
