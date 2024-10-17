@@ -1,9 +1,8 @@
 CREATE TABLE tb_account (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    description VARCHAR(255) NOT NULL,
-    active TINYINT,
+        account_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        account_description VARCHAR(255) NOT NULL,
+        account_active TINYINT,
+        user_id BIGINT NOT NULL,
 
-    id_User BIGINT NOT NULL,
-
-    CONSTRAINT FK_ID_USER FOREIGN KEY (id_User) REFERENCES tb_user(id)
+        CONSTRAINT FK_ID_USER FOREIGN KEY (user_id) REFERENCES tb_user(user_id)
 );
