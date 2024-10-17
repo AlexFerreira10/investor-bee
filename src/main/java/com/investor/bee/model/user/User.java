@@ -1,5 +1,6 @@
 package com.investor.bee.model.user;
 
+import com.investor.bee.model.account.Account;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.*;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.List;
 
 @SQLDelete(sql = "UPDATE tb_user SET active = false WHERE id=?")
 @FilterDef(name = "deletedUserFilter", parameters = @ParamDef(name = "isDeleted", type = Boolean.class))
@@ -41,6 +43,9 @@ public class User {
 
     @Column
     private boolean active;
+
+    @OneToMany(mappedBy = "user")
+    private List<Account> accounts;
 
     @CreationTimestamp
     private Instant creationTimestamp;

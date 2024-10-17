@@ -1,5 +1,6 @@
-package com.investor.bee.model.user;
+package com.investor.bee.model;
 
+import com.investor.bee.model.user.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
