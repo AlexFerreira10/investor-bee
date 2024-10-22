@@ -23,25 +23,25 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name = "user_id")
     private Long id;
 
-    @Column
+    @Column(name = "user_name")
     private String name;
 
-    @Column
+    @Column(name = "user_date_birth")
     private LocalDate birthday;
 
-    @Column
+    @Column(name = "user_cpf")
     private String cpf;
 
-    @Column
+    @Column(name = "user_email")
     private String email;
 
-    @Column
+    @Column(name = "user_password")
     private String password;
 
-    @Column
+    @Column(name = "user_active")
     private boolean active;
 
     @OneToMany(mappedBy = "user")
@@ -61,8 +61,6 @@ public class User {
         this.password = user.password();
         this.active = true;
     }
-
-
 
     public void updateData(UpdateUserDto newData) {
         if(!this.name.equals(newData.name())) {

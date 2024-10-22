@@ -22,16 +22,16 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name = "account_id")
     private Long id;
 
-    @Column
+    @Column(name = "account_description")
     private String description;
 
-    @Column
+    @Column(name = "account_active")
     private boolean active;
 
     @ManyToOne
-    @JoinColumn(name = "id_User")
+    @JoinColumn(name = "user_id")
     private User user;
 }
