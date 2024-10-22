@@ -1,5 +1,6 @@
 package com.investor.bee.model.account;
 
+import com.investor.bee.model.billingAddress.BillingAddress;
 import com.investor.bee.model.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -34,4 +35,8 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne(mappedBy = "account")
+    @PrimaryKeyJoinColumn
+    private BillingAddress billingAddress;
 }
