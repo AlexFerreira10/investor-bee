@@ -2,6 +2,7 @@ package com.investor.bee.model.billingAddress;
 
 import com.investor.bee.model.account.Account;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import org.hibernate.annotations.SQLDelete;
 @Filter(name = "deletedBillingAddressFilter", condition = "active = :isDeleted")
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
 @Table(name = "tb_billing_address")

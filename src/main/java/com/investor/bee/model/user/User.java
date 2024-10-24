@@ -3,6 +3,7 @@ package com.investor.bee.model.user;
 import com.investor.bee.model.account.Account;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.List;
 @Filter(name = "deletedUserFilter", condition = "active = :isDeleted")
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
 @Table(name = "tb_user")

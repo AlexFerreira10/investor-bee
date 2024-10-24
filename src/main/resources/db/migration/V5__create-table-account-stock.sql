@@ -1,7 +1,7 @@
 CREATE TABLE tb_account_stock (
-          account_id BIGINT NOT NULL,
-          stock_id BIGINT NOT NULL,
-          account_stock_quantify INT,
+          account_id BIGINT,
+          stock_id VARCHAR(30),
+          account_stock_quantity INT NOT NULL,
 
           PRIMARY KEY (account_id, stock_id),
 
